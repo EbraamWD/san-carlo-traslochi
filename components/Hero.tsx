@@ -1,11 +1,27 @@
 "use client";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
 export default function Hero() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [0, window.innerHeight], [10, -10]);
-  const rotateY = useTransform(mouseX, [0, window.innerWidth], [-10, 10]);
+
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    // Calcola le dimensioni della finestra solo sul client
+    setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Solo quando abbiamo le dimensioni, creiamo le trasformazioni
+  const rotateX = useTransform(mouseY, [0, windowSize.height], [10, -10]);
+  const rotateY = useTransform(mouseX, [0, windowSize.width], [-10, 10]);
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
@@ -13,10 +29,11 @@ export default function Hero() {
       mouseY.set(e.clientY);
     };
     window.addEventListener("mousemove", handleMouse);
+    return () => window.removeEventListener("mousemove", handleMouse);
   }, [mouseX, mouseY]);
+
   return (
     <section className="relative h-screen flex items-center justify-center text-center overflow-hidden">
-      {/* Video di background */}
       <video
         autoPlay
         loop
@@ -24,13 +41,9 @@ export default function Hero() {
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
         <source src="/media/video/traslochi_hero.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
-
-      {/* Overlay semi-trasparente */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/40"></div>
 
-      {/* Contenuto Hero con effetto 3D */}
       <motion.div
         style={{ rotateX, rotateY }}
         initial={{ opacity: 0, y: 50 }}
