@@ -27,6 +27,14 @@ export default function Contact() {
         >
           Invia la richiesta via email
         </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="tel:+393514987799"
+          className="inline-block bg-blue-800 text-yellow-400 font-bold py-3 px-8 rounded-md shadow-md hover:bg-blue-700 transition ml-4"
+        >
+          Chiama ora: +39 351 498 77 99
+        </motion.a>
       </div>
     </section>
   );

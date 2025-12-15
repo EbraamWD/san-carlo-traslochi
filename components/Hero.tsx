@@ -59,12 +59,20 @@ export default function Hero() {
           Affidati a noi per un trasloco rapido, sicuro e senza stress — in tutta Italia.
         </p>
         <motion.a
-          href="mailto:stefanoservice@email.it"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="mt-8 inline-block bg-yellow-400 text-blue-900 px-8 py-3 rounded-lg font-semibold shadow-md hover:bg-yellow-300 transition"
+          href="mailto:info@sancarlotraslochi.it?subject=Richiesta%20preventivo&body=Buongiorno,%20vorrei%20richiedere%20un%20preventivo%20per%20un%20trasloco.%0A%0ANome:%0ATelefono:%0ADettagli%20del%20trasloco:"
+          className="inline-block bg-yellow-400 text-blue-900 font-bold py-3 px-8 rounded-md shadow-md hover:bg-yellow-300 transition"
         >
-          Richiedi un preventivo
+          Richiedi preventivo in 1 click!
+        </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          href="tel:+393514987799"
+          className="inline-block bg-blue-900 text-yellow-400 font-bold py-3 px-8 rounded-md shadow-md hover:bg-blue-800 transition ml-4"
+        >
+          Chiama ora: +39 351 498 77 99
         </motion.a>
       </motion.div>
     </section>
