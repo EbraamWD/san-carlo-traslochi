@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://sancarlotraslochi.it/sitemap.xml
-
-# Crawl-delay per evitare sovraccarico
-Crawl-delay: 1

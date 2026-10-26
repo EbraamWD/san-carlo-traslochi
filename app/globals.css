@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: #0d1220;
+  --color-ink-2: #141b2d;
+  --color-ink-3: #1d2640;
+  --color-ivory: #f7f3ec;
+  --color-sand: #ece5d8;
+  --color-stone: #6f6a60;
+  --color-line: #ddd5c6;
+  --color-gold: #b48a55;
+  --color-gold-light: #d6b98a;
+  --color-gold-dark: #8c6a3f;
+
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-ink);
+}
+
+@layer components {
+  /* Piccola etichetta sopra i titoli */
+  .eyebrow {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-gold-dark);
+  }
+}
+
+/* Testo lungo nelle pagine servizio e guide */
+.prose-lux p {
+  color: #2e2b27;
+  line-height: 1.75;
+  font-size: 1.125rem;
+}
+.prose-lux p + p {
+  margin-top: 1.1rem;
+}
+
+/* Ingresso: nell'hero all'avvio, nel resto della pagina allo scroll (dove supportato) */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.reveal {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@supports (animation-timeline: view()) {
+  .reveal:not(.hero-reveal .reveal) {
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+    animation-delay: 0s !important;
+  }
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
